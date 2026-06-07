@@ -1,14 +1,102 @@
 [
   {
+    "id": "memoq-tag-cleaner",
+    "name": "memoQ Tags 清理工具",
+    "category": "翻译与本地化",
+    "tags": [
+      "翻译",
+      "清理",
+      "排版"
+    ],
+    "summary": "自动清理翻译软件中的冗余格式标签，避免导入导出时的排版错误。",
+    "status": "available",
+    "details": {
+      "scenarios": "处理从翻译软件导出的双语文件，清理多余标签。",
+      "features": [
+        "标签识别与移除",
+        "格式保留",
+        "批量处理"
+      ],
+      "input_format": "双语文件",
+      "output_format": "清理后的文件",
+      "usage": "选择文件 → 执行清理 → 保存结果。",
+      "notes": "针对特定翻译软件格式优化。"
+    },
+    "action_url": "",
+    "updated_at": "2026-06-07"
+  },
+  {
+    "id": "bilingual-compare",
+    "name": "中英双语对照生成器",
+    "category": "翻译与本地化",
+    "tags": [
+      "翻译",
+      "Word",
+      "Excel"
+    ],
+    "summary": "将源文档与翻译结果合并为左右对照的 Word/Excel 文件，便于审校和排版。",
+    "status": "available",
+    "details": {
+      "scenarios": "翻译审校、合同比对、双语材料制作。",
+      "features": [
+        "支持 Word 段落级对齐",
+        "Excel 表格结构保留",
+        "自动过滤非翻译文本",
+        "生成修改日志"
+      ],
+      "input_format": ".docx / .xlsx",
+      "output_format": "对照版 .docx / .xlsx",
+      "usage": "提供源文件和译文文件 → 运行脚本 → 输出对照文档。",
+      "notes": "核心处理逻辑，非图形界面。"
+    },
+    "action_url": "",
+    "updated_at": "2026-06-07"
+  },
+  {
+    "id": "aligner-assistant",
+    "name": "原文译文对照助手",
+    "category": "翻译与本地化",
+    "tags": [
+      "翻译",
+      "审校",
+      "工具"
+    ],
+    "summary": "快速并排打开源文和译文，支持多窗口同步滚动，方便审校。",
+    "status": "available",
+    "details": {
+      "scenarios": "人工审校时需要同时查看源文和译文。",
+      "features": [
+        "双窗口同步滚动",
+        "快速打开",
+        "支持多种文档格式"
+      ],
+      "input_format": "原文 + 译文",
+      "output_format": "对照视图",
+      "usage": "选择两个文件 → 启动助手 → 对照审校。",
+      "notes": "轻量级辅助工具。"
+    },
+    "action_url": "",
+    "updated_at": "2026-06-07"
+  },
+  {
     "id": "excel-merge-translator",
     "name": "多语种 Excel 翻译合并工具",
     "category": "翻译与本地化",
-    "tags": ["翻译", "Excel", "本地脚本"],
+    "tags": [
+      "翻译",
+      "Excel",
+      "本地脚本"
+    ],
     "summary": "将中英多语种翻译结果合并回原始 Excel，保留表格结构和占位符。",
     "status": "available",
     "details": {
       "scenarios": "需要将 Excel 中的中文列翻译成英文，并合并回原文件的场景。",
-      "features": ["支持多列同时翻译", "保留公式和格式", "占位符保护", "翻译结果与原列合并"],
+      "features": [
+        "支持多列同时翻译",
+        "保留公式和格式",
+        "占位符保护",
+        "翻译结果与原列合并"
+      ],
       "input_format": ".xlsx / .xls",
       "output_format": ".xlsx（合并后文件）",
       "usage": "运行脚本 → 选择源文件 → 选择目标语言 → 等待处理 → 输出文件保存在同目录",
@@ -22,12 +110,21 @@
     "id": "doc-translator",
     "name": "文档翻译工作流",
     "category": "翻译与本地化",
-    "tags": ["翻译", "文档", "自动化"],
+    "tags": [
+      "翻译",
+      "文档",
+      "自动化"
+    ],
     "summary": "批量翻译 Word/PDF/Markdown 文档，保持原文排版和格式。",
     "status": "available",
     "details": {
       "scenarios": "需要批量翻译技术文档、教学材料或合同文件。",
-      "features": ["支持多种文档格式", "保持排版格式", "批量处理", "翻译记忆"],
+      "features": [
+        "支持多种文档格式",
+        "保持排版格式",
+        "批量处理",
+        "翻译记忆"
+      ],
       "input_format": ".docx / .pdf / .md",
       "output_format": ".docx / .pdf / .md",
       "usage": "将文件放入输入文件夹 → 运行脚本 → 输出文件在输出文件夹中",
@@ -38,34 +135,24 @@
     "updated_at": "2026-04-15"
   },
   {
-    "id": "ocr-extractor",
-    "name": "OCR 文字提取工具",
-    "category": "OCR 与数据提取",
-    "tags": ["OCR", "PDF", "图片"],
-    "summary": "从扫描 PDF 和图片中提取文字，支持中英文混合识别。",
-    "status": "testing",
-    "details": {
-      "scenarios": "从扫描的合同、发票、教材中提取可编辑文字。",
-      "features": ["中英文混合识别", "表格结构保留", "批量处理", "输出为 Markdown"],
-      "input_format": ".pdf / .png / .jpg",
-      "output_format": ".md / .txt",
-      "usage": "拖拽文件到窗口或指定文件夹路径 → 运行工具 → 查看输出结果",
-      "notes": "手写文字识别准确率较低。建议使用清晰度高的扫描件。",
-      "screenshot": ""
-    },
-    "action_url": "",
-    "updated_at": "2026-06-01"
-  },
-  {
     "id": "course-material-builder",
     "name": "教学材料生成器",
     "category": "教学材料",
-    "tags": ["教学", "PPT", "文档"],
+    "tags": [
+      "教学",
+      "PPT",
+      "文档"
+    ],
     "summary": "根据课程大纲自动生成教学 PPT 和配套讲义。",
     "status": "planned",
     "details": {
       "scenarios": "快速制作课程幻灯片和随堂讲义。",
-      "features": ["大纲转 PPT", "自动生成讲义", "模板支持", "双语输出"],
+      "features": [
+        "大纲转 PPT",
+        "自动生成讲义",
+        "模板支持",
+        "双语输出"
+      ],
       "input_format": ".md / .txt（大纲）",
       "output_format": ".pptx / .docx",
       "usage": "编写课程大纲 → 选择模板 → 运行生成器 → 检查并微调输出",
@@ -76,15 +163,50 @@
     "updated_at": "2026-06-07"
   },
   {
+    "id": "thesis-workflow",
+    "name": "论文排版与审校工作流",
+    "category": "教学材料",
+    "tags": [
+      "论文",
+      "排版",
+      "工作流"
+    ],
+    "summary": "针对毕业论文的结构化修改流程，包含排版检查和内容审校。",
+    "status": "internal",
+    "details": {
+      "scenarios": "协助进行论文的规范化修改和格式调整。",
+      "features": [
+        "结构完整性检查",
+        "格式规范对照",
+        "参考文献核对",
+        "多轮修改记录"
+      ],
+      "input_format": ".docx / 意见",
+      "output_format": "修订版文档",
+      "usage": "按目录结构放入文件 → 按流程检查 → 输出定稿。",
+      "notes": "内部工作流工具。"
+    },
+    "action_url": "",
+    "updated_at": "2026-06-07"
+  },
+  {
     "id": "pdf-merger",
     "name": "PDF 合并与拆分工具",
     "category": "文档处理",
-    "tags": ["PDF", "本地工具"],
+    "tags": [
+      "PDF",
+      "本地工具"
+    ],
     "summary": "快速合并多个 PDF 或拆分指定页面，支持拖拽操作。",
     "status": "available",
     "details": {
       "scenarios": "需要将多个文档合并为一个 PDF，或从大文件中提取特定页面。",
-      "features": ["拖拽操作", "页面预览", "合并/拆分/旋转", "批量处理"],
+      "features": [
+        "拖拽操作",
+        "页面预览",
+        "合并/拆分/旋转",
+        "批量处理"
+      ],
       "input_format": ".pdf",
       "output_format": ".pdf",
       "usage": "打开工具 → 拖入 PDF 文件 → 选择操作 → 导出结果",
@@ -95,15 +217,188 @@
     "updated_at": "2026-03-10"
   },
   {
+    "id": "word-polisher",
+    "name": "Word 文档基础润色",
+    "category": "文档处理",
+    "tags": [
+      "文档",
+      "Python",
+      "排版"
+    ],
+    "summary": "自动清理 Word 文档中的多余空格、空行，规范中英文标点间距。",
+    "status": "available",
+    "details": {
+      "scenarios": "公文起草、项目申报书初稿整理、日常通知排版。",
+      "features": [
+        "清除多余空格",
+        "合并重复标点",
+        "规范中英文混排空格",
+        "保留段落结构"
+      ],
+      "input_format": ".docx",
+      "output_format": ".docx",
+      "usage": "放入 input 目录 → 运行 polish_docx.py → 查看 output 目录。",
+      "notes": "规则型处理，不涉及大模型改写。"
+    },
+    "action_url": "",
+    "updated_at": "2026-06-07"
+  },
+  {
+    "id": "meeting-summarizer",
+    "name": "会议摘要生成器",
+    "category": "文档处理",
+    "tags": [
+      "会议",
+      "摘要",
+      "飞书"
+    ],
+    "summary": "从会议录音或文字记录中自动生成结构化摘要和待办事项。",
+    "status": "planned",
+    "details": {
+      "scenarios": "将冗长的会议内容整理为简洁的摘要和行动计划。",
+      "features": [
+        "语音转文字",
+        "自动摘要",
+        "待办提取",
+        "飞书消息发送"
+      ],
+      "input_format": ".mp3 / .wav / 文字记录",
+      "output_format": "结构化摘要 .md",
+      "usage": "上传录音或粘贴文字 → 选择输出格式 → 生成摘要 → 审查并导出",
+      "notes": "规划中。需要语音识别 API 和摘要模型支持。",
+      "screenshot": ""
+    },
+    "action_url": "",
+    "updated_at": "2026-06-07"
+  },
+  {
+    "id": "contract-generator",
+    "name": "翻译合同生成器",
+    "category": "文档处理",
+    "tags": [
+      "合同",
+      "模板",
+      "生成"
+    ],
+    "summary": "根据预设模板，快速生成标准翻译服务合同或报价单。",
+    "status": "available",
+    "details": {
+      "scenarios": "接单时需要快速生成合同或报价单。",
+      "features": [
+        "模板管理",
+        "自动填充",
+        "PDF/Word 导出"
+      ],
+      "input_format": "项目信息",
+      "output_format": ".docx / .pdf",
+      "usage": "填写项目信息 → 选择模板 → 生成文件。",
+      "notes": "模板内容需用户自行维护。"
+    },
+    "action_url": "",
+    "updated_at": "2026-06-07"
+  },
+  {
+    "id": "cad-text-extract",
+    "name": "CAD 图纸文本提取",
+    "category": "OCR 与数据提取",
+    "tags": [
+      "CAD",
+      "工程",
+      "Python"
+    ],
+    "summary": "从 CAD 图纸中提取所有文字信息，去重并生成文本报告。",
+    "status": "available",
+    "details": {
+      "scenarios": "工程图纸审查，需要统计或提取图面上的文字说明。",
+      "features": [
+        "全量文本提取",
+        "图层信息保留",
+        "去重统计",
+        "结构化输出"
+      ],
+      "input_format": ".dxf / .dwg",
+      "output_format": ".txt / 报告",
+      "usage": "指定图纸路径 → 运行提取脚本 → 查看输出。",
+      "notes": "基于 ODA 工具链。"
+    },
+    "action_url": "",
+    "updated_at": "2026-06-07"
+  },
+  {
+    "id": "ocr-extractor",
+    "name": "OCR 文字提取工具",
+    "category": "OCR 与数据提取",
+    "tags": [
+      "OCR",
+      "PDF",
+      "图片"
+    ],
+    "summary": "从扫描 PDF 和图片中提取文字，支持中英文混合识别。",
+    "status": "testing",
+    "details": {
+      "scenarios": "从扫描的合同、发票、教材中提取可编辑文字。",
+      "features": [
+        "中英文混合识别",
+        "表格结构保留",
+        "批量处理",
+        "输出为 Markdown"
+      ],
+      "input_format": ".pdf / .png / .jpg",
+      "output_format": ".md / .txt",
+      "usage": "拖拽文件到窗口或指定文件夹路径 → 运行工具 → 查看输出结果",
+      "notes": "手写文字识别准确率较低。建议使用清晰度高的扫描件。",
+      "screenshot": ""
+    },
+    "action_url": "",
+    "updated_at": "2026-06-01"
+  },
+  {
+    "id": "receipt-ocr",
+    "name": "收据 OCR 识别归档",
+    "category": "OCR 与数据提取",
+    "tags": [
+      "OCR",
+      "财务",
+      "自动化"
+    ],
+    "summary": "自动识别收据图片，提取关键入账字段，生成 Excel 账本并自动编号归档。",
+    "status": "testing",
+    "details": {
+      "scenarios": "日常报销票据整理，减少手工录入工作量。",
+      "features": [
+        "AI 视觉识别",
+        "关键信息抽取",
+        "自动编号归档",
+        "周报生成"
+      ],
+      "input_format": "图片文件",
+      "output_format": ".xlsx / 归档文件夹",
+      "usage": "放入待处理图片 → 运行识别脚本 → 查看生成的账本。",
+      "notes": "第一阶段为本地手动运行。"
+    },
+    "action_url": "",
+    "updated_at": "2026-06-07"
+  },
+  {
     "id": "data-cleaner",
     "name": "数据清洗脚本",
     "category": "自动化脚本",
-    "tags": ["Python", "数据处理", "自动化"],
+    "tags": [
+      "Python",
+      "数据处理",
+      "自动化"
+    ],
     "summary": "自动清理和格式化 CSV/Excel 数据，处理缺失值和重复项。",
     "status": "internal",
     "details": {
       "scenarios": "处理从各种来源收集的原始数据，清理格式以便后续分析。",
-      "features": ["自动检测编码", "缺失值处理", "重复项去重", "格式标准化", "导出清洗报告"],
+      "features": [
+        "自动检测编码",
+        "缺失值处理",
+        "重复项去重",
+        "格式标准化",
+        "导出清洗报告"
+      ],
       "input_format": ".csv / .xlsx",
       "output_format": ".csv / .xlsx + 清洗报告 .md",
       "usage": "配置规则文件 → 指定输入输出路径 → 运行脚本 → 查看报告和结果",
@@ -114,34 +409,24 @@
     "updated_at": "2026-02-28"
   },
   {
-    "id": "stock-monitor",
-    "name": "股票价格监控",
-    "category": "自动化脚本",
-    "tags": ["金融", "监控", "飞书通知"],
-    "summary": "定时监控股票价格变动，通过飞书推送涨跌提醒。",
-    "status": "available",
-    "details": {
-      "scenarios": "需要实时关注特定股票价格，设定涨跌阈值后自动接收通知。",
-      "features": ["多股票同时监控", "自定义阈值", "飞书消息推送", "隐藏窗口运行"],
-      "input_format": "股票代码列表（文本配置）",
-      "output_format": "飞书消息通知",
-      "usage": "编辑配置文件添加股票代码和阈值 → 启动监控脚本 → 后台运行并接收通知",
-      "notes": "使用新浪 API 获取实时数据。每 5 分钟刷新一次。",
-      "screenshot": ""
-    },
-    "action_url": "",
-    "updated_at": "2026-05-05"
-  },
-  {
     "id": "email-sender",
     "name": "本地邮件发送脚本",
     "category": "自动化脚本",
-    "tags": ["邮件", "Python", "自动化"],
+    "tags": [
+      "邮件",
+      "Python",
+      "自动化"
+    ],
     "summary": "通过本地 Python 脚本发送邮件，支持附件和 HTML 正文。",
     "status": "available",
     "details": {
       "scenarios": "自动化场景下需要发送邮件通知或报告。",
-      "features": ["支持附件", "HTML 正文", "多收件人", "日志记录"],
+      "features": [
+        "支持附件",
+        "HTML 正文",
+        "多收件人",
+        "日志记录"
+      ],
       "input_format": "邮件内容（配置或参数）",
       "output_format": "已发送邮件",
       "usage": "配置 .env 文件 → 运行脚本或指定参数 → 确认发送详情 → 查看日志",
@@ -152,15 +437,159 @@
     "updated_at": "2026-04-20"
   },
   {
+    "id": "stock-monitor",
+    "name": "股票价格监控",
+    "category": "自动化脚本",
+    "tags": [
+      "金融",
+      "监控",
+      "飞书通知"
+    ],
+    "summary": "定时监控股票价格变动，通过飞书推送涨跌提醒。",
+    "status": "available",
+    "details": {
+      "scenarios": "需要实时关注特定股票价格，设定涨跌阈值后自动接收通知。",
+      "features": [
+        "多股票同时监控",
+        "自定义阈值",
+        "飞书消息推送",
+        "隐藏窗口运行"
+      ],
+      "input_format": "股票代码列表（文本配置）",
+      "output_format": "飞书消息通知",
+      "usage": "编辑配置文件添加股票代码和阈值 → 启动监控脚本 → 后台运行并接收通知",
+      "notes": "使用新浪 API 获取实时数据。每 5 分钟刷新一次。",
+      "screenshot": ""
+    },
+    "action_url": "",
+    "updated_at": "2026-05-05"
+  },
+  {
+    "id": "sales-ledger",
+    "name": "销售记账小工具",
+    "category": "自动化脚本",
+    "tags": [
+      "记账",
+      "数据管理",
+      "本地工具"
+    ],
+    "summary": "记录销售流水和收款状态，自动计算未收金额，支持导出 Excel。",
+    "status": "internal",
+    "details": {
+      "scenarios": "个人或小团队日常流水记账，跟踪尾款回收。",
+      "features": [
+        "流水记录",
+        "状态追踪",
+        "自动汇总",
+        "筛选与导出"
+      ],
+      "input_format": "界面输入",
+      "output_format": "CSV / 界面显示",
+      "usage": "启动脚本 → 录入记录 → 导出报表。",
+      "notes": "纯本地 SQLite 数据库，数据不上传。"
+    },
+    "action_url": "",
+    "updated_at": "2026-06-07"
+  },
+  {
+    "id": "task-monitor",
+    "name": "长任务监控助手",
+    "category": "自动化脚本",
+    "tags": [
+      "监控",
+      "飞书",
+      "自动化"
+    ],
+    "summary": "为长时间运行的脚本提供状态心跳、断点续跑和异常飞书报警。",
+    "status": "available",
+    "details": {
+      "scenarios": "后台运行耗时任务时，需要远程了解进度。",
+      "features": [
+        "主动状态汇报",
+        "异常自动报警",
+        "心跳检测",
+        "失败报告生成"
+      ],
+      "input_format": "脚本集成",
+      "output_format": "飞书消息 / 日志文件",
+      "usage": "在脚本中引入监控模块 → 启动 → 接收通知。",
+      "notes": "依赖飞书机器人配置。"
+    },
+    "action_url": "",
+    "updated_at": "2026-06-07"
+  },
+  {
+    "id": "planner-float",
+    "name": "桌面计划浮窗",
+    "category": "效率工具",
+    "tags": [
+      "计划",
+      "桌面",
+      "Python"
+    ],
+    "summary": "读取 Markdown 日计划，在桌面生成置顶的温馨风格浮窗，自动刷新。",
+    "status": "available",
+    "details": {
+      "scenarios": "需要时刻提醒今日待办，但不希望打开复杂的日历软件。",
+      "features": [
+        "Markdown 驱动",
+        "置顶显示",
+        "自动刷新",
+        "多时段主题切换"
+      ],
+      "input_format": "Markdown 文件",
+      "output_format": "桌面浮窗",
+      "usage": "编写日计划 → 运行脚本 → 浮窗显示。",
+      "notes": "轻量级 GUI 工具。"
+    },
+    "action_url": "",
+    "updated_at": "2026-06-07"
+  },
+  {
+    "id": "folder-navigator",
+    "name": "项目目录一键导航",
+    "category": "效率工具",
+    "tags": [
+      "导航",
+      "文件管理",
+      "自动化"
+    ],
+    "summary": "一键打开项目相关的“输入/输出”文件夹，快速定位工作目录。",
+    "status": "available",
+    "details": {
+      "scenarios": "日常工作中需要频繁在多个项目文件夹间切换。",
+      "features": [
+        "预设路径",
+        "一键打开",
+        "快速切换"
+      ],
+      "input_format": "配置文件",
+      "output_format": "打开文件夹窗口",
+      "usage": "点击对应项目按钮 → 自动打开相关文件夹。",
+      "notes": "配置简单，支持自定义路径。"
+    },
+    "action_url": "",
+    "updated_at": "2026-06-07"
+  },
+  {
     "id": "image-translator",
     "name": "图片内文字翻译工具",
     "category": "实验工具",
-    "tags": ["翻译", "图片", "实验性"],
+    "tags": [
+      "翻译",
+      "图片",
+      "实验性"
+    ],
     "summary": "识别图片中的文字并翻译，将译文覆盖在原图位置上。",
     "status": "testing",
     "details": {
       "scenarios": "翻译图片中的文字内容，如海报、说明书、菜单等。",
-      "features": ["文字识别", "自动翻译", "原文覆盖", "多语言支持"],
+      "features": [
+        "文字识别",
+        "自动翻译",
+        "原文覆盖",
+        "多语言支持"
+      ],
       "input_format": ".png / .jpg",
       "output_format": ".png（带译文）",
       "usage": "选择图片 → 选择目标语言 → 处理 → 保存结果",
@@ -169,24 +598,5 @@
     },
     "action_url": "",
     "updated_at": "2026-06-03"
-  },
-  {
-    "id": "meeting-summarizer",
-    "name": "会议摘要生成器",
-    "category": "文档处理",
-    "tags": ["会议", "摘要", "飞书"],
-    "summary": "从会议录音或文字记录中自动生成结构化摘要和待办事项。",
-    "status": "planned",
-    "details": {
-      "scenarios": "将冗长的会议内容整理为简洁的摘要和行动计划。",
-      "features": ["语音转文字", "自动摘要", "待办提取", "飞书消息发送"],
-      "input_format": ".mp3 / .wav / 文字记录",
-      "output_format": "结构化摘要 .md",
-      "usage": "上传录音或粘贴文字 → 选择输出格式 → 生成摘要 → 审查并导出",
-      "notes": "规划中。需要语音识别 API 和摘要模型支持。",
-      "screenshot": ""
-    },
-    "action_url": "",
-    "updated_at": "2026-06-07"
   }
 ]
