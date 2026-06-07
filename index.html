@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>H-Studio — 个人工作流工具库</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --ink: #0f172a;
+      --ink-secondary: #475569;
+      --ink-muted: #94a3b8;
+      --border: #e2e8f0;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-light: #eff6ff;
+      --dark-blue: #1e3a5f;
+      --dark-blue-light: #2d4a6f;
+      --status-available: #16a34a;
+      --status-available-bg: #dcfce7;
+      --status-available-text: #15803d;
+      --status-testing: #ea580c;
+      --status-testing-bg: #ffedd5;
+      --status-testing-text: #c2410c;
+      --status-internal: #6b7280;
+      --status-internal-bg: #f3f4f6;
+      --status-internal-text: #4b5563;
+      --status-planned: #d97706;
+      --status-planned-bg: #fef3c7;
+      --status-planned-text: #b45309;
+      --radius: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.05);
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      --font-mono: "SF Mono", "Fira Code", Consolas, monospace;
+      --max-width: 1200px;
+      --header-h: 56px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font-family: inherit; cursor: pointer; }
+
+    /* ===== Header ===== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .logo-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .nav a {
+      color: var(--ink-secondary);
+      font-size: 14px;
+      font-weight: 400;
+      transition: color 0.15s;
+    }
+    .nav a:hover { color: var(--ink); text-decoration: none; }
+
+    /* ===== Hero ===== */
+    .hero {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 20px 24px 0;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 28px;
+      align-items: start;
+    }
+    .hero-left .tag-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .tag-line::before {
+      content: '';
+      width: 16px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 1px;
+    }
+    .hero-left h1 {
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 10px;
+      color: var(--ink);
+    }
+    .hero-left .desc {
+      font-size: 14px;
+      color: var(--ink-secondary);
+      line-height: 1.6;
+      max-width: 500px;
+      margin-bottom: 18px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .btn-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: var(--radius);
+      border: 1px solid transparent;
+      transition: all 0.15s;
+    }
+    .btn-hero.primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .btn-hero.primary:hover {
+      background: var(--accent-hover);
+      text-decoration: none;
+    }
+    .btn-hero.secondary {
+      background: var(--surface);
+      color: var(--ink);
+      border-color: var(--border);
+    }
+    .btn-hero.secondary:hover {
+      border-color: var(--ink-muted);
+      background: var(--bg);
+      text-decoration: none;
+    }
+
+    /* Index Card */
+    .index-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 20px;
+      box-shadow: var(--shadow-md);
+    }
+    .index-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .index-card-header h3 {
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--status-available);
+      box-shadow: 0 0 0 3px var(--status-available-bg);
+    }
+    .index-card-subtitle {
+      font-size: 12px;
+      color: var(--ink-muted);
+      margin-bottom: 16px;
+    }
+    .category-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .category-grid-item {
+      padding: 12px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.15s;
+      border: 1px solid var(--border);
+    }
+    .category-grid-item:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-sm);
+    }
+    .category-grid-item.highlight {
+      background: var(--dark-blue);
+      color: #fff;
+      border-color: var(--dark-blue);
+      grid-column: 1 / -1;
+    }
+    .category-grid-item .cat-name {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .category-grid-item .cat-desc {
+      font-size: 11px;
+      color: var(--ink-muted);
+      line-height: 1.4;
+    }
+    .category-grid-item.highlight .cat-desc {
+      color: rgba(255,255,255,0.7);
+    }
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-item .stat-num {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .stat-item .stat-label {
+      font-size: 11px;
+      color: var(--ink-muted);
+    }
+
+    /* ===== Section ===== */
+    .section {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 32px 24px 0;
+    }
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .section-desc {
+      font-size: 14px;
+      color: var(--ink-secondary);
+      margin-bottom: 16px;
+      max-width: 640px;
+      line-height: 1.7;
+    }
+
+    /* ===== Filter Bar (sticky) ===== */
+    .filter-sticky {
+      position: sticky;
+      top: var(--header-h);
+      z-index: 50;
+      background: var(--bg);
+      padding: 12px 0 8px;
+    }
+    .filter-bar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .search-wrapper {
+      flex: 1;
+      min-width: 220px;
+      position: relative;
+    }
+    .search-wrapper svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--ink-muted);
+      pointer-events: none;
+    }
+    .search-wrapper input {
+      width: 100%;
+      height: 42px;
+      padding: 0 12px 0 38px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 14px;
+      background: var(--surface);
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .search-wrapper input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+    }
+    .search-wrapper input::placeholder { color: var(--ink-muted); }
+    .filter-select {
+      height: 42px;
+      padding: 0 32px 0 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 14px;
+      background: var(--surface);
+      color: var(--ink);
+      cursor: pointer;
+      outline: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+    }
+    .filter-select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+    }
+    .result-count {
+      font-size: 13px;
+      color: var(--ink-muted);
+      margin-left: auto;
+      white-space: nowrap;
+    }
+
+    /* ===== Tool Grid ===== */
+    .tool-grid {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 16px 24px 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 16px;
+    }
+    .tool-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+      cursor: pointer;
+    }
+    .tool-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    .card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .card-icon.cat-translation { background: #dbeafe; color: #2563eb; }
+    .card-icon.cat-teaching { background: #dcfce7; color: #16a34a; }
+    .card-icon.cat-document { background: #f3e8ff; color: #9333ea; }
+    .card-icon.cat-ocr { background: #ffedd5; color: #ea580c; }
+    .card-icon.cat-automation { background: #e0f2fe; color: #0284c7; }
+    .card-icon.cat-experiment { background: #fce7f3; color: #db2777; }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 500;
+      border-radius: 20px;
+      flex-shrink: 0;
+    }
+    .status-badge.available { background: var(--status-available-bg); color: var(--status-available-text); }
+    .status-badge.testing { background: var(--status-testing-bg); color: var(--status-testing-text); }
+    .status-badge.internal { background: var(--status-internal-bg); color: var(--status-internal-text); }
+    .status-badge.planned { background: var(--status-planned-bg); color: var(--status-planned-text); }
+
+    .card-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+    .card-summary {
+      font-size: 13px;
+      color: var(--ink-secondary);
+      line-height: 1.6;
+    }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tag-pill {
+      display: inline-block;
+      padding: 2px 10px;
+      font-size: 12px;
+      font-weight: 400;
+      border-radius: 20px;
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+    .card-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      transition: color 0.15s;
+    }
+    .card-action:hover { color: var(--accent); }
+    .card-action svg { width: 14px; height: 14px; }
+
+    /* ===== Updates Section ===== */
+    .updates-section {
+      max-width: var(--max-width);
+      margin: 36px auto 0;
+      padding: 0 24px;
+    }
+    .updates-card {
+      background: var(--dark-blue);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 24px;
+      color: #fff;
+    }
+    .updates-left h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .updates-left p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+    }
+    .update-entries {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .update-entry {
+      background: var(--dark-blue-light);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .update-entry-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .update-entry-title .date {
+      color: rgba(255,255,255,0.4);
+      font-weight: 400;
+      margin-right: 8px;
+      font-size: 12px;
+    }
+    .update-entry-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.5;
+    }
+
+    /* ===== About Section ===== */
+    .about-section {
+      max-width: var(--max-width);
+      margin: 32px auto 0;
+      padding: 0 24px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .about-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+    }
+    .about-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .about-card p {
+      font-size: 13px;
+      color: var(--ink-secondary);
+      line-height: 1.7;
+    }
+    .about-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    .about-card li {
+      font-size: 13px;
+      color: var(--ink-secondary);
+      line-height: 1.7;
+      padding-left: 16px;
+      position: relative;
+    }
+    .about-card li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 20px 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    /* ===== Modal ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s, visibility 0.2s;
+    }
+    .modal-overlay.open { opacity: 1; visibility: visible; }
+    .modal {
+      background: var(--surface);
+      border-radius: var(--radius-xl);
+      width: 100%;
+      max-width: 600px;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg);
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.25s ease-out;
+    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+    .modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 24px 24px 0;
+      gap: 16px;
+    }
+    .modal-header h2 {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-muted);
+      font-size: 18px;
+      transition: all 0.15s;
+      flex-shrink: 0;
+    }
+    .modal-close:hover { background: var(--bg); color: var(--ink); }
+    .modal-body { padding: 20px 24px 24px; }
+    .modal-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+    .modal-section { margin-bottom: 20px; }
+    .modal-section:last-child { margin-bottom: 0; }
+    .modal-section h3 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+    .modal-section p, .modal-section li {
+      font-size: 14px;
+      color: var(--ink-secondary);
+      line-height: 1.7;
+    }
+    .modal-section ul { padding-left: 18px; }
+    .modal-section li { margin-bottom: 4px; }
+    .modal-io {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .modal-io-item {
+      padding: 12px;
+      background: var(--bg);
+      border-radius: var(--radius);
+    }
+    .modal-io-item label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .modal-io-item span {
+      display: block;
+      margin-top: 4px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .btn-modal {
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-modal:hover { border-color: #cbd5e1; background: var(--bg); }
+    .btn-modal.primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .btn-modal.primary:hover { background: var(--accent-hover); }
+
+    /* ===== Empty State ===== */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--ink-muted);
+    }
+    .empty-state p { font-size: 15px; }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 16px;
+        gap: 20px;
+      }
+      .hero-left h1 { font-size: 30px; }
+      .index-card { order: -1; }
+      .updates-card { grid-template-columns: 1fr; }
+      .about-section { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .header-inner { padding: 0 16px; }
+      .nav { display: none; }
+      .hero { padding: 16px 16px 0; }
+      .hero-left h1 { font-size: 26px; }
+      .hero-actions { flex-direction: column; }
+      .btn-hero { justify-content: center; }
+      .section { padding: 24px 16px 0; }
+      .tool-grid { padding: 12px 16px 0; grid-template-columns: 1fr; }
+      .filter-bar { flex-direction: column; align-items: stretch; }
+      .result-count { margin-left: 0; text-align: center; }
+      .filter-sticky { top: calc(var(--header-h) - 4px); }
+      .updates-card { padding: 20px; }
+      .about-section { padding: 0 16px 32px; }
+      .modal-overlay { padding: 12px; }
+      .modal-header { padding: 16px 16px 0; }
+      .modal-body { padding: 16px; }
+      .modal-io { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-icon">H</div>
+        <div class="logo-text">H-Studio</div>
+      </div>
+      <nav class="nav">
+        <a href="#tools">工具清单</a>
+        <a href="#updates">最近更新</a>
+        <a href="#about">关于</a>
+        <a href="#contact">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="tag-line">个人工作流工具库</div>
+      <h1>H-Studio</h1>
+      <p class="desc">整理我为翻译、教学、文档处理、OCR 和本地自动化工作制作的实用工具。每个工具都围绕真实任务设计，方便查找、复用和持续更新。</p>
+      <div class="hero-actions">
+        <a href="#tools" class="btn-hero primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          浏览工具清单
+        </a>
+        <a href="#about" class="btn-hero secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          查看使用场景
+        </a>
+      </div>
+    </div>
+
+    <div class="index-card">
+      <div class="index-card-header">
+        <h3>工具索引</h3>
+        <div class="status-dot" title="维护中"></div>
+      </div>
+      <div class="index-card-subtitle">按任务场景组织，持续维护</div>
+      <div class="category-grid" id="categoryGrid"></div>
+      <div class="stats-row" id="statsRow"></div>
+    </div>
+  </section>
+
+  <!-- Tools Section -->
+  <section class="section" id="tools">
+    <h2 class="section-title">工具清单</h2>
+    <p class="section-desc">用搜索和筛选快速定位工具。示例数据可以替换成你的真实项目名称、链接和说明。</p>
+
+    <div class="filter-sticky">
+      <div class="filter-bar">
+        <div class="search-wrapper">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" id="searchInput" placeholder="搜索工具名称、场景或关键词" />
+        </div>
+        <select class="filter-select" id="categoryFilter">
+          <option value="all">全部分类</option>
+        </select>
+        <select class="filter-select" id="statusFilter">
+          <option value="all">全部状态</option>
+          <option value="available">已可用</option>
+          <option value="testing">测试中</option>
+          <option value="internal">内部使用</option>
+          <option value="planned">计划中</option>
+        </select>
+        <div class="result-count" id="resultCount"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tool-grid" id="toolGrid"></div>
+
+  <!-- Updates Section -->
+  <section class="updates-section" id="updates">
+    <div class="updates-card">
+      <div class="updates-left">
+        <h2>最近更新</h2>
+        <p>这里适合记录新增工具、功能变化和可公开使用的版本说明。</p>
+      </div>
+      <div class="update-entries" id="updateEntries"></div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section" id="about">
+    <div class="about-card">
+      <h3>关于 H-Studio</h3>
+      <p>H-Studio 是一个个人工作室式的工具集合，用来沉淀日常工作中反复使用的脚本、网页工具、文档模板和自动化流程。</p>
+      <p style="margin-top:8px">页面重点不是展示概念，而是把工具放到清楚的位置，让访问者知道它能处理什么任务，以及是否适合继续了解。</p>
+    </div>
+    <div class="about-card" id="contact">
+      <h3>适合放在这里的内容</h3>
+      <ul>
+        <li>真实工具入口和说明文档</li>
+        <li>教学材料、翻译工具和文档处理流程</li>
+        <li>演示截图、更新日志和联系方式</li>
+        <li>可公开分享的本地自动化经验</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      &copy; 2026 H-Studio. 所有工具为个人项目，按原样提供。
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <h2 id="modalTitle"></h2>
+        <button class="modal-close" id="modalClose" aria-label="关闭">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    const STATUS_LABELS = { available: '已可用', testing: '测试中', internal: '内部使用', planned: '计划中' };
+    const CAT_ICONS = {
+      '翻译与本地化': { char: '文', cls: 'cat-translation' },
+      '教学材料': { char: '课', cls: 'cat-teaching' },
+      '文档处理': { char: '档', cls: 'cat-document' },
+      'OCR 与数据提取': { char: '识', cls: 'cat-ocr' },
+      '自动化脚本': { char: '流', cls: 'cat-automation' },
+      '实验工具': { char: '验', cls: 'cat-experiment' }
+    };
+    const CAT_DESCS = {
+      '翻译与本地化': '术语、占位符、Excel / Word 结构保留',
+      '教学材料': '课文讲解、PPT、练习生成',
+      '文档处理': '批量整理、格式检查、输出归档',
+      'OCR 与数据提取': '图片、票据、表格信息结构化',
+      '自动化脚本': '本地流程、提醒、报告和推送',
+      '实验工具': '探索性功能，效果待验证'
+    };
+
+    let tools = [];
+
+    async function loadTools() {
+      try {
+        const resp = await fetch('tools.json');
+        if (!resp.ok) throw new Error('Failed');
+        tools = await resp.json();
+      } catch (e) {
+        document.getElementById('toolGrid').innerHTML = '<div class="empty-state"><p>加载失败：请确保 tools.json 与 index.html 在同一目录。</p></div>';
+        return;
+      }
+      buildIndexCard();
+      buildFilters();
+      renderTools();
+      buildUpdates();
+    }
+
+    function buildIndexCard() {
+      const categories = [...new Set(tools.map(t => t.category))];
+      const grid = document.getElementById('categoryGrid');
+      categories.forEach((cat, i) => {
+        const item = document.createElement('div');
+        item.className = 'category-grid-item' + (i === 0 ? ' highlight' : '');
+        item.innerHTML = `<div class="cat-name">${escHtml(cat)}</div><div class="cat-desc">${escHtml(CAT_DESCS[cat] || '')}</div>`;
+        item.addEventListener('click', () => {
+          document.getElementById('categoryFilter').value = cat;
+          renderTools();
+          document.getElementById('tools').scrollIntoView({ behavior: 'smooth' });
+        });
+        grid.appendChild(item);
+      });
+
+      const counts = {
+        tools: tools.length,
+        available: tools.filter(t => t.status === 'available').length,
+        categories: categories.length
+      };
+      document.getElementById('statsRow').innerHTML =
+        `<div class="stat-item"><div class="stat-num">${counts.tools}</div><div class="stat-label">收录工具</div></div>` +
+        `<div class="stat-item"><div class="stat-num">${counts.available}</div><div class="stat-label">已可用</div></div>` +
+        `<div class="stat-item"><div class="stat-num">${counts.categories}</div><div class="stat-label">分类</div></div>`;
+    }
+
+    function buildFilters() {
+      const categories = [...new Set(tools.map(t => t.category))].sort();
+      const sel = document.getElementById('categoryFilter');
+      categories.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        sel.appendChild(opt);
+      });
+    }
+
+    function getFilteredTools() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const category = document.getElementById('categoryFilter').value;
+      const status = document.getElementById('statusFilter').value;
+      return tools.filter(t => {
+        if (category !== 'all' && t.category !== category) return false;
+        if (status !== 'all' && t.status !== status) return false;
+        if (query) {
+          const hay = `${t.name} ${t.summary} ${t.tags.join(' ')} ${t.category}`.toLowerCase();
+          if (!hay.includes(query)) return false;
+        }
+        return true;
+      });
+    }
+
+    function renderTools() {
+      const filtered = getFilteredTools();
+      const grid = document.getElementById('toolGrid');
+      const countEl = document.getElementById('resultCount');
+      countEl.textContent = filtered.length === tools.length
+        ? `共 ${filtered.length} 个工具`
+        : `显示 ${filtered.length} / ${tools.length}`;
+
+      if (!filtered.length) {
+        grid.innerHTML = '<div class="empty-state"><p>没有找到匹配的工具，请调整筛选条件。</p></div>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map(tool => {
+        const icon = CAT_ICONS[tool.category] || { char: '工', cls: 'cat-automation' };
+        return `
+        <div class="tool-card" data-id="${tool.id}">
+          <div class="card-top">
+            <div class="card-icon ${icon.cls}">${icon.char}</div>
+            <span class="status-badge ${tool.status}">${STATUS_LABELS[tool.status]}</span>
+          </div>
+          <div class="card-name">${escHtml(tool.name)}</div>
+          <div class="card-summary">${escHtml(tool.summary)}</div>
+          <div class="card-tags">${tool.tags.map(t => `<span class="tag-pill">${escHtml(t)}</span>`).join('')}</div>
+          <div class="card-action" onclick="event.stopPropagation(); openModal('${tool.id}')">
+            查看详情
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>`;
+      }).join('');
+
+      grid.querySelectorAll('.tool-card').forEach(card => {
+        card.addEventListener('click', () => openModal(card.dataset.id));
+      });
+    }
+
+    function openModal(id) {
+      const tool = tools.find(t => t.id === id);
+      if (!tool) return;
+      document.getElementById('modalTitle').textContent = tool.name;
+      const d = tool.details || {};
+      document.getElementById('modalBody').innerHTML = `
+        <div class="modal-meta">
+          <span class="status-badge ${tool.status}">${STATUS_LABELS[tool.status]}</span>
+          <span class="tag-pill" style="background:var(--bg)">${escHtml(tool.category)}</span>
+          ${tool.tags.map(t => `<span class="tag-pill">${escHtml(t)}</span>`).join('')}
+        </div>
+        <div class="modal-section"><h3>简介</h3><p>${escHtml(tool.summary)}</p></div>
+        ${d.scenarios ? `<div class="modal-section"><h3>适用场景</h3><p>${escHtml(d.scenarios)}</p></div>` : ''}
+        ${d.features ? `<div class="modal-section"><h3>主要功能</h3><ul>${d.features.map(f => `<li>${escHtml(f)}</li>`).join('')}</ul></div>` : ''}
+        <div class="modal-section"><div class="modal-io">
+          <div class="modal-io-item"><label>输入格式</label><span>${escHtml(d.input_format || '—')}</span></div>
+          <div class="modal-io-item"><label>输出结果</label><span>${escHtml(d.output_format || '—')}</span></div>
+        </div></div>
+        ${d.usage ? `<div class="modal-section"><h3>使用说明</h3><p>${escHtml(d.usage)}</p></div>` : ''}
+        ${d.notes ? `<div class="modal-section"><h3>注意事项</h3><p>${escHtml(d.notes)}</p></div>` : ''}
+        <div class="modal-actions">
+          ${tool.action_url ? `<a href="${escHtml(tool.action_url)}" class="btn-modal primary" target="_blank">打开工具</a>` : `<button class="btn-modal" onclick="closeModal()">关闭</button>`}
+        </div>
+      `;
+      document.getElementById('modalOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.getElementById('modalOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    function buildUpdates() {
+      const entries = [
+        { date: '2026-06-07', title: '工具清单主页初版', desc: '建立 H-Studio 的统一入口，支持搜索、分类和详情查看。' },
+        { date: '2026-06-07', title: '示例分类结构', desc: '先覆盖翻译、教学、文档处理、OCR、自动化和实验工具。' },
+        { date: '2026-06-07', title: '后续扩展计划', desc: '可继续加入真实链接、截图、使用说明和版本记录。' }
+      ];
+      document.getElementById('updateEntries').innerHTML = entries.map(e =>
+        `<div class="update-entry"><div class="update-entry-title"><span class="date">${e.date}</span>${e.title}</div><div class="update-entry-desc">${e.desc}</div></div>`
+      ).join('');
+    }
+
+    function escHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    document.getElementById('searchInput').addEventListener('input', renderTools);
+    document.getElementById('categoryFilter').addEventListener('change', renderTools);
+    document.getElementById('statusFilter').addEventListener('change', renderTools);
+
+    loadTools();
+  </script>
+</body>
+</html>

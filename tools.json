@@ -1,0 +1,192 @@
+[
+  {
+    "id": "excel-merge-translator",
+    "name": "多语种 Excel 翻译合并工具",
+    "category": "翻译与本地化",
+    "tags": ["翻译", "Excel", "本地脚本"],
+    "summary": "将中英多语种翻译结果合并回原始 Excel，保留表格结构和占位符。",
+    "status": "available",
+    "details": {
+      "scenarios": "需要将 Excel 中的中文列翻译成英文，并合并回原文件的场景。",
+      "features": ["支持多列同时翻译", "保留公式和格式", "占位符保护", "翻译结果与原列合并"],
+      "input_format": ".xlsx / .xls",
+      "output_format": ".xlsx（合并后文件）",
+      "usage": "运行脚本 → 选择源文件 → 选择目标语言 → 等待处理 → 输出文件保存在同目录",
+      "notes": "需要网络连接以调用翻译 API。大文件建议分批处理。",
+      "screenshot": ""
+    },
+    "action_url": "",
+    "updated_at": "2026-05-20"
+  },
+  {
+    "id": "doc-translator",
+    "name": "文档翻译工作流",
+    "category": "翻译与本地化",
+    "tags": ["翻译", "文档", "自动化"],
+    "summary": "批量翻译 Word/PDF/Markdown 文档，保持原文排版和格式。",
+    "status": "available",
+    "details": {
+      "scenarios": "需要批量翻译技术文档、教学材料或合同文件。",
+      "features": ["支持多种文档格式", "保持排版格式", "批量处理", "翻译记忆"],
+      "input_format": ".docx / .pdf / .md",
+      "output_format": ".docx / .pdf / .md",
+      "usage": "将文件放入输入文件夹 → 运行脚本 → 输出文件在输出文件夹中",
+      "notes": "PDF 翻译需要先进行 OCR 识别。扫描件质量影响翻译效果。",
+      "screenshot": ""
+    },
+    "action_url": "",
+    "updated_at": "2026-04-15"
+  },
+  {
+    "id": "ocr-extractor",
+    "name": "OCR 文字提取工具",
+    "category": "OCR 与数据提取",
+    "tags": ["OCR", "PDF", "图片"],
+    "summary": "从扫描 PDF 和图片中提取文字，支持中英文混合识别。",
+    "status": "testing",
+    "details": {
+      "scenarios": "从扫描的合同、发票、教材中提取可编辑文字。",
+      "features": ["中英文混合识别", "表格结构保留", "批量处理", "输出为 Markdown"],
+      "input_format": ".pdf / .png / .jpg",
+      "output_format": ".md / .txt",
+      "usage": "拖拽文件到窗口或指定文件夹路径 → 运行工具 → 查看输出结果",
+      "notes": "手写文字识别准确率较低。建议使用清晰度高的扫描件。",
+      "screenshot": ""
+    },
+    "action_url": "",
+    "updated_at": "2026-06-01"
+  },
+  {
+    "id": "course-material-builder",
+    "name": "教学材料生成器",
+    "category": "教学材料",
+    "tags": ["教学", "PPT", "文档"],
+    "summary": "根据课程大纲自动生成教学 PPT 和配套讲义。",
+    "status": "planned",
+    "details": {
+      "scenarios": "快速制作课程幻灯片和随堂讲义。",
+      "features": ["大纲转 PPT", "自动生成讲义", "模板支持", "双语输出"],
+      "input_format": ".md / .txt（大纲）",
+      "output_format": ".pptx / .docx",
+      "usage": "编写课程大纲 → 选择模板 → 运行生成器 → 检查并微调输出",
+      "notes": "目前处于规划阶段，尚未开始开发。",
+      "screenshot": ""
+    },
+    "action_url": "",
+    "updated_at": "2026-06-07"
+  },
+  {
+    "id": "pdf-merger",
+    "name": "PDF 合并与拆分工具",
+    "category": "文档处理",
+    "tags": ["PDF", "本地工具"],
+    "summary": "快速合并多个 PDF 或拆分指定页面，支持拖拽操作。",
+    "status": "available",
+    "details": {
+      "scenarios": "需要将多个文档合并为一个 PDF，或从大文件中提取特定页面。",
+      "features": ["拖拽操作", "页面预览", "合并/拆分/旋转", "批量处理"],
+      "input_format": ".pdf",
+      "output_format": ".pdf",
+      "usage": "打开工具 → 拖入 PDF 文件 → 选择操作 → 导出结果",
+      "notes": "纯本地处理，文件不会上传到服务器。",
+      "screenshot": ""
+    },
+    "action_url": "",
+    "updated_at": "2026-03-10"
+  },
+  {
+    "id": "data-cleaner",
+    "name": "数据清洗脚本",
+    "category": "自动化脚本",
+    "tags": ["Python", "数据处理", "自动化"],
+    "summary": "自动清理和格式化 CSV/Excel 数据，处理缺失值和重复项。",
+    "status": "internal",
+    "details": {
+      "scenarios": "处理从各种来源收集的原始数据，清理格式以便后续分析。",
+      "features": ["自动检测编码", "缺失值处理", "重复项去重", "格式标准化", "导出清洗报告"],
+      "input_format": ".csv / .xlsx",
+      "output_format": ".csv / .xlsx + 清洗报告 .md",
+      "usage": "配置规则文件 → 指定输入输出路径 → 运行脚本 → 查看报告和结果",
+      "notes": "内部使用工具，规则文件需要根据具体项目调整。",
+      "screenshot": ""
+    },
+    "action_url": "",
+    "updated_at": "2026-02-28"
+  },
+  {
+    "id": "stock-monitor",
+    "name": "股票价格监控",
+    "category": "自动化脚本",
+    "tags": ["金融", "监控", "飞书通知"],
+    "summary": "定时监控股票价格变动，通过飞书推送涨跌提醒。",
+    "status": "available",
+    "details": {
+      "scenarios": "需要实时关注特定股票价格，设定涨跌阈值后自动接收通知。",
+      "features": ["多股票同时监控", "自定义阈值", "飞书消息推送", "隐藏窗口运行"],
+      "input_format": "股票代码列表（文本配置）",
+      "output_format": "飞书消息通知",
+      "usage": "编辑配置文件添加股票代码和阈值 → 启动监控脚本 → 后台运行并接收通知",
+      "notes": "使用新浪 API 获取实时数据。每 5 分钟刷新一次。",
+      "screenshot": ""
+    },
+    "action_url": "",
+    "updated_at": "2026-05-05"
+  },
+  {
+    "id": "email-sender",
+    "name": "本地邮件发送脚本",
+    "category": "自动化脚本",
+    "tags": ["邮件", "Python", "自动化"],
+    "summary": "通过本地 Python 脚本发送邮件，支持附件和 HTML 正文。",
+    "status": "available",
+    "details": {
+      "scenarios": "自动化场景下需要发送邮件通知或报告。",
+      "features": ["支持附件", "HTML 正文", "多收件人", "日志记录"],
+      "input_format": "邮件内容（配置或参数）",
+      "output_format": "已发送邮件",
+      "usage": "配置 .env 文件 → 运行脚本或指定参数 → 确认发送详情 → 查看日志",
+      "notes": "发送前必须确认收件人和内容。日志记录在 Logs 目录。",
+      "screenshot": ""
+    },
+    "action_url": "",
+    "updated_at": "2026-04-20"
+  },
+  {
+    "id": "image-translator",
+    "name": "图片内文字翻译工具",
+    "category": "实验工具",
+    "tags": ["翻译", "图片", "实验性"],
+    "summary": "识别图片中的文字并翻译，将译文覆盖在原图位置上。",
+    "status": "testing",
+    "details": {
+      "scenarios": "翻译图片中的文字内容，如海报、说明书、菜单等。",
+      "features": ["文字识别", "自动翻译", "原文覆盖", "多语言支持"],
+      "input_format": ".png / .jpg",
+      "output_format": ".png（带译文）",
+      "usage": "选择图片 → 选择目标语言 → 处理 → 保存结果",
+      "notes": "实验性功能，复杂排版图片的处理效果可能不理想。",
+      "screenshot": ""
+    },
+    "action_url": "",
+    "updated_at": "2026-06-03"
+  },
+  {
+    "id": "meeting-summarizer",
+    "name": "会议摘要生成器",
+    "category": "文档处理",
+    "tags": ["会议", "摘要", "飞书"],
+    "summary": "从会议录音或文字记录中自动生成结构化摘要和待办事项。",
+    "status": "planned",
+    "details": {
+      "scenarios": "将冗长的会议内容整理为简洁的摘要和行动计划。",
+      "features": ["语音转文字", "自动摘要", "待办提取", "飞书消息发送"],
+      "input_format": ".mp3 / .wav / 文字记录",
+      "output_format": "结构化摘要 .md",
+      "usage": "上传录音或粘贴文字 → 选择输出格式 → 生成摘要 → 审查并导出",
+      "notes": "规划中。需要语音识别 API 和摘要模型支持。",
+      "screenshot": ""
+    },
+    "action_url": "",
+    "updated_at": "2026-06-07"
+  }
+]
